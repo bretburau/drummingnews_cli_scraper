@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require './/lib/drummingnews_cli_scraper.rb'
+DrummingNews::CLI.new.call
+
+
