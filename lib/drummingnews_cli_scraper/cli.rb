@@ -6,21 +6,23 @@ class DrummingNews::CLI
     puts "Which site's articles would you like to view?"
     puts "1. Modern Drummer"
     puts "2. DRUM!"
-    puts "3. Something Else"
-    puts "4. Others"
+    puts "3. Classic Drummer"
+    puts "4. Innovative Percussion"
     puts "Or 'exit' to quit"
     mag_choice = ""
     mag_choice = gets.strip until mag_choice.to_i.between?(1,4) || mag_choice.downcase == "exit"
 
+    scraper = DrummingNews::Scraper.new #Instansiate scraper
+
     case mag_choice
     when "1"
-      puts "modern drumme"
+      scraper.modern_drummer #puts "modern drumme"
     when "2"
-      puts "drum!"
+      scraper.drum #puts "drum!"
     when "3"
-      puts "something else"
+      scraper.classic_drummer #puts "classic drummer"
     when "4" 
-      puts "others"
+      scraper.ip #puts "Innovative Percussion"
     end
     
   end
