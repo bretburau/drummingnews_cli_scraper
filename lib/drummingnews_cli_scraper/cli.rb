@@ -1,7 +1,15 @@
 class DrummingNews::CLI
   attr_accessor :articles
+
   def call
     puts "Welcome to you drumming newsfeed!"
+    @scraper = DrummingNews::Scraper.new #Instansiate scraper
+    choose_mag    
+    list_articles
+    show_article
+  end
+
+  def choose_mag
     puts ""
     puts "Which site's articles would you like to view?"
     puts "1. Modern Drummer"
@@ -9,26 +17,23 @@ class DrummingNews::CLI
     puts "3. Classic Drummer"
     puts "4. Innovative Percussion"
     puts "Or 'exit' to quit"
-    choose_mag    
-    list_articles
-    #call until choose_mag == false ### To loop, I don't like it
-  end
-
-  def choose_mag
-    scraper = DrummingNews::Scraper.new #Instansiate scraper
+    
     mag_choice = ""
-    mag_choice = gets.strip until mag_choice.to_i.between?(1,4) || mag_choice.downcase == "exit"
+    mag_choice = gets.strip #until mag_choice.to_i.between?(1,4) || mag_choice.downcase == "exit"
     case mag_choice.downcase
-    when "1"
-      @articles = scraper.modern_drummer #puts "modern drumme"
-    when "2"
-      @articles = scraper.drum #puts "drum!"
-    when "3"
-      @articles = scraper.classic_drummer #puts "classic drummer"
-    when "4" 
-      @articles = scraper.ip #puts "Innovative Percussion"
-    when "exit"
-      false
+      when "1"
+        @articles = @scraper.modern_drummer
+      when "2"
+        @articles = @scraper.drum
+      when "3"
+        @articles = @scraper.classic_drummer
+      when "4" 
+        @articles = @scraper.ip
+      when "exit"
+        exit
+      else
+        puts "Please enter 1-4 or 'exit'"
+        choose_mag
     end
   end
 
@@ -36,6 +41,15 @@ class DrummingNews::CLI
     puts "------------------------------------------"
     @articles.each_with_index do |article, index|
       puts "#{index + 1}. #{article.title} - #{article.author} #{article.date}"
+    end
+  end
+
+  def show_article
+    puts "Which one would you like to view? Type 'back' to go to the main menu"
+    article_choice = gets.strip
+    until article_choice.to_i > 0 || article_choice == "back" do
+      puts "Please enter a valid article number or 'back'"
+      article_choice = gets.strip
     end
   end
 
