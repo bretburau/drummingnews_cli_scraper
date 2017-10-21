@@ -1,5 +1,5 @@
 class DrummingNews::CLI
-
+  attr_accessor :articles
   def call
     puts "Welcome to you drumming newsfeed!"
     puts ""
@@ -24,6 +24,15 @@ class DrummingNews::CLI
     when "4" 
       scraper.ip #puts "Innovative Percussion"
     end
-    
+    @articles = ["Article", "Article", "Article", "Article", "Article", "Article", "Article", "Article", "Article", "Article"]
+    list_articles
   end
+
+  def list_articles
+    @articles.each_with_index do |article, index|
+      puts "#{index + 1}. #{article}"
+    end
+  end
+
+
 end
