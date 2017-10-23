@@ -2,8 +2,7 @@ class DrummingNews::CLI
   attr_accessor :articles
 
   def call
-    puts "Welcome to you drumming newsfeed!"  
-    puts ""
+    
     
     @scraper = DrummingNews::Scraper.new #Instansiate scraper
     choose_mag    
@@ -55,15 +54,15 @@ class DrummingNews::CLI
     end
     if article_choice == "back"
       puts ""
-      choose_mag
+      call
     else
       display_article(article_choice.to_i)
     end
   end
 
   def display_article(article_choice)
-    puts "you chose #{article_choice}"
-    choose_mag
+    puts "you chose #{article_choice}" ###Need to actually display the article...needs scraping
+    call
   end
 
 end
