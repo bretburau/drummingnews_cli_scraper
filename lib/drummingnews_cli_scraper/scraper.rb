@@ -19,6 +19,7 @@ class DrummingNews::Scraper
       article.magazine = magazine #Assign modern drummer object to the article
       list << article
     end
+    binding.pry
     list
   end
 
