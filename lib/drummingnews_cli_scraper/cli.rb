@@ -8,7 +8,7 @@ class DrummingNews::CLI
     @scraper = DrummingNews::Scraper.new #Instansiate scraper
     choose_mag    
     list_articles
-    show_article
+    choose_article
   end
 
   def choose_mag
@@ -41,19 +41,29 @@ class DrummingNews::CLI
   def list_articles
     puts "------------------------------------------"
     @articles.each_with_index do |article, index|
-      puts "#{index + 1}. #{article.title} - #{article.author} - #{article.date}"
+      puts "#{index + 1}. #{article.title} - #{article.author} -  #{article.date}"
     end
+    puts "------------------------------------------"
   end
 
-  def show_article
+  def choose_article
     puts "Which one would you like to view? Type 'back' to go to the main menu"
     article_choice = gets.strip
     until article_choice.to_i > 0 || article_choice == "back" do ###Probably gonna need to change condition to a .length or something
       puts "Please enter a valid article number or 'back'"
       article_choice = gets.strip
     end
-
+    if article_choice == "back"
+      puts ""
+      choose_mag
+    else
+      display_article(article_choice.to_i)
+    end
   end
 
+  def display_article(article_choice)
+    puts "you chose #{article_choice}"
+    choose_mag
+  end
 
 end
