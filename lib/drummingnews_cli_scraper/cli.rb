@@ -2,8 +2,6 @@ class DrummingNews::CLI
   attr_accessor :articles
 
   def call
-    
-    
     @scraper = DrummingNews::Scraper.new #Instansiate scraper
     choose_mag    
     list_articles
