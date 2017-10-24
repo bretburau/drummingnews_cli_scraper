@@ -2,6 +2,12 @@
 require './lib/drummingnews_cli_scraper.rb'
 puts "Welcome to you drumming newsfeed!"  
 puts ""
+
+Modern_drummer = DrummingNews::Magazine.new("Modern Drummer")
+DRUM = DrummingNews::Magazine.new("DRUM!")
+Classic_drummer = DrummingNews::Magazine.new("Classic Drummer")
+Innovative_percussion = DrummingNews::Magazine.new("Innovative Percussion")
+
 DrummingNews::CLI.new.call
 
 
