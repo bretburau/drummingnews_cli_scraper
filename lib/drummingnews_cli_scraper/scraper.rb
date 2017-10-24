@@ -1,7 +1,18 @@
 class DrummingNews::Scraper
   attr_accessor :magazines
+  MAGAZINE_TITLES = ["Modern Drummer", "DRUM!", "Classic Drummer", "Innovative Percussion"]
   def initialize
     @magazines = []
+  end
+
+  def scrape ##### instanciate magazines and get titles
+    create_magazines
+  end
+
+  def create_magazines
+    MAGAZINE_TITLES.each do |magazine| 
+      @magazines << DrummingNews::Magazine.create(magazine) unless DrummingNews::Magazine.all.include?(magazine)
+    end
   end
 
   def modern_drummer
@@ -19,7 +30,6 @@ class DrummingNews::Scraper
       article.magazine = magazine #Assign modern drummer object to the article
       list << article
     end
-    binding.pry
     list
   end
 
