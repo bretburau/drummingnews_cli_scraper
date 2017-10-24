@@ -7,14 +7,10 @@ class DrummingNews::Magazine
   end
 
   def self.create(name)
-    self.new(name) unless self.all.include?(name)
+    self.new(name) #unless self.all.include?(name)
   end
 
   def self.all
-    output = []
-    @@all.each do |e|
-      output << e.name
-    end
-    output
+    @@all
   end
 end
