@@ -2,7 +2,7 @@ class DrummingNews::Scraper
   attr_accessor :magazines
   MAGAZINE_TITLES = ["Modern Drummer", "DRUM!", "Classic Drummer", "Innovative Percussion"]
   def initialize
-    @magazines = []
+    @magazines = DrummingNews::Magazine.all
   end
 
   def scrape_titles ##### instanciate magazines and get titles
@@ -29,10 +29,10 @@ class DrummingNews::Scraper
 
   def scrape_modern_drummer
     list = []
-    if !@magazines.find {|e| e.name == "Modern Drummer"}
-      magazine = DrummingNews::Magazine.create("Modern Drummer")
-      @magazines << magazine
-    end
+    # if !@magazines.find {|e| e.name == "Modern Drummer"}
+    #   magazine = DrummingNews::Magazine.create("Modern Drummer")
+    #   @magazines << magazine
+    # end
     ###Scrape articles
     10.times do
       article = DrummingNews::Article.new
@@ -42,6 +42,7 @@ class DrummingNews::Scraper
       article.magazine = magazine #Assign modern drummer object to the article
       list << article
     end
+
     list
   end
 
