@@ -5,8 +5,20 @@ class DrummingNews::Scraper
     @magazines = []
   end
 
-  def scrape ##### instanciate magazines and get titles
+  def scrape_titles ##### instanciate magazines and get titles
     create_magazines
+    @magazines.each do |magazine|
+      case magazine.name 
+        when "Modern Drummer"
+          scrape_modern_drummer
+        when "DRUM!"
+          scrape_drum
+        when "Classic Drummer"
+          scrape_classic_drummer
+        when "Innovative Percussion"
+          scrape_ip
+        end
+    end
   end
 
   def create_magazines
@@ -15,7 +27,7 @@ class DrummingNews::Scraper
     end
   end
 
-  def modern_drummer
+  def scrape_modern_drummer
     list = []
     if !@magazines.find {|e| e.name == "Modern Drummer"}
       magazine = DrummingNews::Magazine.create("Modern Drummer")
@@ -33,7 +45,7 @@ class DrummingNews::Scraper
     list
   end
 
-  def drum
+  def scrape_drum
     list = []
     10.times do
       article = DrummingNews::Article.new
@@ -45,7 +57,7 @@ class DrummingNews::Scraper
     list
   end
 
-  def classic_drummer
+  def scrape_classic_drummer
     list = []
     10.times do
       article = DrummingNews::Article.new
@@ -57,7 +69,7 @@ class DrummingNews::Scraper
     list
   end
 
-  def ip
+  def scrape_ip
     list = []
     10.times do
       article = DrummingNews::Article.new

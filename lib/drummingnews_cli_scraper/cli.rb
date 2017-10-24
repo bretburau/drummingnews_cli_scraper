@@ -2,7 +2,7 @@ class DrummingNews::CLI
   attr_accessor :articles
 
   def call
-    @scraper = DrummingNews::Scraper.new.scrape #Instansiate scraper, get article titles
+    @scraper = DrummingNews::Scraper.new.scrape_titles #Instansiate scraper, get article titles
     choose_mag    
     list_articles
     choose_article
@@ -15,7 +15,7 @@ class DrummingNews::CLI
     puts "3. Classic Drummer"
     puts "4. Innovative Percussion"
     puts "Or 'exit' to quit"
-    
+    binding.pry
     mag_choice = ""
     mag_choice = gets.strip 
     case mag_choice.downcase ####Need to update calls here
