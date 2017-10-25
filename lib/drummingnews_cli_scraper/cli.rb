@@ -20,13 +20,13 @@ class DrummingNews::CLI
     mag_choice = gets.strip 
     case mag_choice.downcase ####Need to update calls here
       when "1"
-        @articles = DrummingNews::Magazine.all.find {|e| e.name == "Modern Drummer"}.articles ###Find magazine by title and get articles
+        @articles = Modern_drummer.articles ###Find magazine by title and get articles
       when "2"
-        @articles = DrummingNews::Magazine.all.find {|e| e.name == "DRUM!"}.articles
+        @articles = DRUM.articles
       when "3"
-        @articles = DrummingNews::Magazine.all.find {|e| e.name == "Classic Drummer"}.articles
+        @articles = Classic_drummer.articles
       when "4" 
-        @articles = DrummingNews::Magazine.all.find {|e| e.name == "Innovative Percussion"}.articles
+        @articles = Innovative_percussion.articles
       when "exit"
         exit
       else
@@ -44,13 +44,13 @@ class DrummingNews::CLI
   end
 
   def choose_article
-    puts "Which one would you like to view? Type 'back' to go to the main menu, or 'exit' to quit"
+    puts "Which one would you like to view? Enter 'back' to go to the main menu, or 'exit' to quit"
     article_choice = gets.strip
-    until article_choice.to_i > 0 || article_choice.downcase == "back" || article_choice.downcase == "exit" do ###Probably gonna need to change condition to a .length or something
+    until article_choice.to_i.between?(1, 10) || article_choice.downcase == "back" || article_choice.downcase == "exit" do ###Probably gonna need to change condition to a .length or something
       puts "Please enter a valid article number or 'back'"
       article_choice = gets.strip
     end
-    if article_choice == "back"
+    if article_choice.downcase == "back"
       puts ""
       call
     elsif article_choice.downcase == "exit"
