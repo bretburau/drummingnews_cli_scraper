@@ -5,6 +5,7 @@ class DrummingNews::CLI
     @scraper = DrummingNews::Scraper.new #Instansiate scraper
     @scraper.scrape_titles #get article titles
     @scraper.scrape_md ###For testing
+    @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
     call
   end
 
@@ -66,7 +67,7 @@ class DrummingNews::CLI
   end
 
   def display_article(article_choice)
-    article_url =  Modern_drummer.find(article_choice).url ###Need to actually scrape content from the URL and display it
+    article_url =  DRUM.find(article_choice).url ###Todo un hard-code the magazine
     article_content = @scraper.scrape_article(article_url)
     puts article_content
     #display_content

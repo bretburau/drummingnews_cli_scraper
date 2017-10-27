@@ -10,7 +10,7 @@ Modern_drummer = DrummingNews::Magazine.new("Modern Drummer")
 DRUM = DrummingNews::Magazine.new("DRUM!")
 Classic_drummer = DrummingNews::Magazine.new("Classic Drummer")
 Innovative_percussion = DrummingNews::Magazine.new("Innovative Percussion")
-
+Scraper = DrummingNews::Scraper.new
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 

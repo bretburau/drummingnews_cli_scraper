@@ -49,7 +49,19 @@ class DrummingNews::Scraper
   end
 
   def scrape_drum
+    html = open("http://drummagazine.com/news/")
+    doc = Nokogiri::HTML(html)
+    doc.css("h2.cb-post-title").each do |scrape|
+      article = DrummingNews::Article.new
+      article.title = scrape.text
+      article.url = scrape.css("a").attribute("href").value
+      article.magazine = DRUM
+      DRUM.articles << article
+    end
 
+    #need to start with the 4th article for some reason 
+    # doc.css("h2.cb-post-title")[4].text
+    #doc.css("h2.cb-post-title a")[0].attribute("href").value
   end
 
 end
