@@ -1,7 +1,15 @@
 #!/usr/bin/env ruby
 
+require 'pry'
+require 'nokogiri'
+require 'open-uri'
 require "bundler/setup"
 require "drummingnews_cli_scraper"
+
+Modern_drummer = DrummingNews::Magazine.new("Modern Drummer")
+DRUM = DrummingNews::Magazine.new("DRUM!")
+Classic_drummer = DrummingNews::Magazine.new("Classic Drummer")
+Innovative_percussion = DrummingNews::Magazine.new("Innovative Percussion")
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.

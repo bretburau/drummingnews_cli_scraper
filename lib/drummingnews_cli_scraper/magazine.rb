@@ -11,6 +11,10 @@ class DrummingNews::Magazine
     self.new(name) #unless self.all.include?(name)
   end
 
+  def find(num)
+    @articles[num-1]
+  end
+
   def self.all
     @@all
   end

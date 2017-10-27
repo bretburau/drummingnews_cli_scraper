@@ -1,9 +1,14 @@
 class DrummingNews::CLI
   attr_accessor :articles
 
+  def start
+    @scraper = DrummingNews::Scraper.new #Instansiate scraper
+    @scraper.scrape_titles #get article titles
+    @scraper.scrape_md ###For testing
+    call
+  end
+
   def call
-    @scraper = DrummingNews::Scraper.new.scrape_titles #Instansiate scraper, get article titles
-    
     choose_mag    
     list_articles
     choose_article
@@ -61,7 +66,10 @@ class DrummingNews::CLI
   end
 
   def display_article(article_choice)
-    puts "you chose #{article_choice}" ###Need to actually display the article...needs scraping
+    article_url =  Modern_drummer.find(article_choice).url ###Need to actually scrape content from the URL and display it
+    article_content = @scraper.scrape_article(article_url)
+    puts article_content
+    #display_content
     call
   end
 

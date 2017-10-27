@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
-require './lib/drummingnews_cli_scraper.rb'
+
+require 'pry'
+require 'nokogiri'
+require 'open-uri'
+require_relative '../lib/drummingnews_cli_scraper.rb'
 puts "Welcome to you drumming newsfeed!"  
 puts ""
 
@@ -8,6 +12,6 @@ DRUM = DrummingNews::Magazine.new("DRUM!")
 Classic_drummer = DrummingNews::Magazine.new("Classic Drummer")
 Innovative_percussion = DrummingNews::Magazine.new("Innovative Percussion")
 
-DrummingNews::CLI.new.call
+DrummingNews::CLI.new.start
 
 

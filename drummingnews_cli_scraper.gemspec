@@ -6,11 +6,10 @@ require "drummingnews_cli_scraper/version"
 Gem::Specification.new do |spec|
   spec.name          = "drummingnews_cli_scraper"
   spec.version       = DrummingnewsCliScraper::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["<github email address>"]
+  spec.authors       = ["Bret Burau"]
+  spec.email         = ["burhooo@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = "Scraper CLI to display articles for several drumming publications."
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
