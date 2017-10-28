@@ -40,7 +40,7 @@ class DrummingNews::Scraper
     html = open(url)
     doc = Nokogiri::HTML(html)
     ###return content as needed...hash or just the paragraph?
-    binding.pry
+    
     # doc.css(".entry-content p").each do |p| ## For MD!!!!
     doc.css(".cb-itemprop p").each do |p|
       article += p.text
@@ -65,15 +65,20 @@ class DrummingNews::Scraper
   def scrape_rhythm
     html = open("http://www.musicradar.com/rhythm")
     doc = Nokogiri::HTML(html)
-    doc.css(".feature-block a").each |scrape|
+    doc.css(".feature-block a").each do |scrape| #Scrapes header titles
       article = DrummingNews::Article.new
       article.title = scrape.css("span.article-name").text
-      article.url = scrape.css.attribute("href").value
+      article.url = scrape.attribute("href").value
       article.magazine = Rhythm
       Rhythm.articles << article
     end
-  end
-
+    doc.css(".listingResult").first(7).each do |scrape|
+      article = DrummingNews::Article.new
+      article.title = scrape.css("h3").text
+      article.url = scrape.css("a").attribute("href")
+      article.magazine = Rhythm
+      Rhythm.articles << article
+    end
 
     # doc.css(".feature-block a span.article-name")[0].text Title for first 3
     # doc.css(".feature-block a")[0].attribute("href").value #####Works in header for 3 articles

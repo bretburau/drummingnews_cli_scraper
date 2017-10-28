@@ -4,8 +4,8 @@ class DrummingNews::CLI
   def start
     @scraper = DrummingNews::Scraper.new #Instansiate scraper
     @scraper.scrape_titles #get article titles
-    @scraper.scrape_md ###For testing
-    @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
+    # @scraper.scrape_md ###For testing
+    # @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
     @scraper.scrape_rhythm #Samesies
     call
   end
@@ -68,7 +68,7 @@ class DrummingNews::CLI
   end
 
   def display_article(article_choice)
-    article_url =  DRUM.find(article_choice).url ###Todo un hard-code the magazine
+    article_url =  Rhythm.find(article_choice).url ###Todo un hard-code the magazine
     article_content = @scraper.scrape_article(article_url)
     puts article_content
     #display_content
