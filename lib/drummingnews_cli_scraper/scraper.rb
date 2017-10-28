@@ -5,7 +5,7 @@ class DrummingNews::Scraper
     scrape(Modern_drummer)
     scrape(DRUM)
     scrape(Innovative_percussion)
-    scrape(Classic_drummer)
+    scrape(Rhythm)
   end
 
   def scrape(magazine_name) ##Keeps adding dummy articles that are already created
@@ -60,6 +60,27 @@ class DrummingNews::Scraper
       article.magazine = DRUM
       DRUM.articles << article
     end
+  end
+
+  def scrape_rhythm
+    html = open("http://www.musicradar.com/rhythm")
+    doc = Nokogiri::HTML(html)
+    doc.css(".feature-block a").each |scrape|
+      article = DrummingNews::Article.new
+      article.title = scrape.css("span.article-name").text
+      article.url = scrape.css.attribute("href").value
+      article.magazine = Rhythm
+      Rhythm.articles << article
+    end
+  end
+
+
+    # doc.css(".feature-block a span.article-name")[0].text Title for first 3
+    # doc.css(".feature-block a")[0].attribute("href").value #####Works in header for 3 articles
+
+    # doc.css(".listingResult a").attribute("href") ###For next ones
+    # doc.css(".listingResult h3").text
+
   end
 
 end

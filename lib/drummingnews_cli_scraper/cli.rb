@@ -6,6 +6,7 @@ class DrummingNews::CLI
     @scraper.scrape_titles #get article titles
     @scraper.scrape_md ###For testing
     @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
+    @scraper.scrape_rhythm #Samesies
     call
   end
 
@@ -19,7 +20,7 @@ class DrummingNews::CLI
     puts "Which site's articles would you like to view?"
     puts "1. Modern Drummer"
     puts "2. DRUM!"
-    puts "3. Classic Drummer"
+    puts "3. Rhythm Magazine"
     puts "4. Innovative Percussion"
     puts "Or 'exit' to quit"
     mag_choice = ""
@@ -30,7 +31,7 @@ class DrummingNews::CLI
       when "2"
         @articles = DRUM.articles
       when "3"
-        @articles = Classic_drummer.articles
+        @articles = Rhythm.articles
       when "4" 
         @articles = Innovative_percussion.articles
       when "exit"
