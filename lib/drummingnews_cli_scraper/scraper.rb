@@ -40,7 +40,9 @@ class DrummingNews::Scraper
     html = open(url)
     doc = Nokogiri::HTML(html)
     ###return content as needed...hash or just the paragraph?
-    doc.css(".entry-content p").each do |p|
+    binding.pry
+    # doc.css(".entry-content p").each do |p| ## For MD!!!!
+    doc.css(".cb-itemprop p").each do |p|
       article += p.text
       article += "\n\n"
     end
@@ -58,10 +60,6 @@ class DrummingNews::Scraper
       article.magazine = DRUM
       DRUM.articles << article
     end
-
-    #need to start with the 4th article for some reason 
-    # doc.css("h2.cb-post-title")[4].text
-    #doc.css("h2.cb-post-title a")[0].attribute("href").value
   end
 
 end
