@@ -42,7 +42,8 @@ class DrummingNews::Scraper
     ###return content as needed...hash or just the paragraph?
     
     # doc.css(".entry-content p").each do |p| ## For MD!!!!
-    doc.css(".cb-itemprop p").each do |p|
+    # doc.css(".cb-itemprop p").each do |p| ## For DRUM!!!!!
+    doc.css(".gallery-text p").each do |p|
       article += p.text
       article += "\n\n"
     end
@@ -72,7 +73,7 @@ class DrummingNews::Scraper
       article.magazine = Rhythm
       Rhythm.articles << article
     end
-    doc.css(".listingResult").first(7).each do |scrape|
+    doc.css(".listingResult").first(7).each do |scrape| #Scrapes the rest
       article = DrummingNews::Article.new
       article.title = scrape.css("h3").text
       article.url = scrape.css("a").attribute("href")
