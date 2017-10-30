@@ -4,7 +4,7 @@ class DrummingNews::Scraper
   def scrape_titles ##### get titles   
     scrape(Modern_drummer)
     scrape(DRUM)
-    scrape(Innovative_percussion)
+    scrape(Drumhead)
     scrape(Rhythm)
   end
 
@@ -43,7 +43,7 @@ class DrummingNews::Scraper
     
     # doc.css(".entry-content p").each do |p| ## For MD!!!!
     # doc.css(".cb-itemprop p").each do |p| ## For DRUM!!!!!
-    doc.css(".gallery-text p").each do |p|
+    doc.css(".gallery-text p").each do |p| ## For Rhythm
       article += p.text
       article += "\n\n"
     end
@@ -80,13 +80,18 @@ class DrummingNews::Scraper
       article.magazine = Rhythm
       Rhythm.articles << article
     end
+  end
 
-    # doc.css(".feature-block a span.article-name")[0].text Title for first 3
-    # doc.css(".feature-block a")[0].attribute("href").value #####Works in header for 3 articles
-
-    # doc.css(".listingResult a").attribute("href") ###For next ones
-    # doc.css(".listingResult h3").text
-
+  def scrape_drumhead
+    html = open("http://www.drumheadmag.com/news.html")
+    doc = Nokogiri::HTML(html)
+    doc.css("a.PostHeader").each do |scrape|
+      article = DrummingNews::Article.new
+      article.title = scrape.text
+      article.url = scrape.attribute("href")
+      article.magazine = Drumhead
+      Drumhead.articles << article
+    end
   end
 
 end

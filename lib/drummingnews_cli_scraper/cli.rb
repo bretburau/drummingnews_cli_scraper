@@ -6,7 +6,8 @@ class DrummingNews::CLI
     @scraper.scrape_titles #get article titles
     # @scraper.scrape_md ###For testing
     # @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
-    @scraper.scrape_rhythm #Samesies
+    # @scraper.scrape_rhythm #Samesies
+    @scraper.scrape_drumhead
     call
   end
 
@@ -21,7 +22,7 @@ class DrummingNews::CLI
     puts "1. Modern Drummer"
     puts "2. DRUM!"
     puts "3. Rhythm Magazine"
-    puts "4. Innovative Percussion"
+    puts "4. Drumhead Magazine"
     puts "Or 'exit' to quit"
     mag_choice = ""
     mag_choice = gets.strip 
@@ -33,7 +34,7 @@ class DrummingNews::CLI
       when "3"
         @articles = Rhythm.articles
       when "4" 
-        @articles = Innovative_percussion.articles
+        @articles = Drumhead.articles
       when "exit"
         exit
       else
