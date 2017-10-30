@@ -88,6 +88,7 @@ class DrummingNews::Scraper
     doc.css("a.PostHeader").each do |scrape|
       article = DrummingNews::Article.new
       article.title = scrape.text
+      binding.pry
       article.url = scrape.attribute("href")
       article.magazine = Drumhead
       Drumhead.articles << article
