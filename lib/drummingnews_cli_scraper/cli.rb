@@ -69,7 +69,7 @@ class DrummingNews::CLI
   end
 
   def display_article(article_choice)
-    article_url =  Rhythm.find(article_choice).url ###Todo un hard-code the magazine
+    article_url =  Drumhead.find(article_choice).url ###Todo un hard-code the magazine
     article_content = @scraper.scrape_article(article_url)
     puts article_content
     #display_content

@@ -43,8 +43,9 @@ class DrummingNews::Scraper
     
     # doc.css(".entry-content p").each do |p| ## For MD!!!!
     # doc.css(".cb-itemprop p").each do |p| ## For DRUM!!!!!
-    doc.css(".gallery-text p").each do |p| ## For Rhythm
-      article += p.text
+    # doc.css(".gallery-text p").each do |p| ## For Rhythm
+    doc.css(".art-article").each do |p| ## For Rhythm  
+      article += p.content
       article += "\n\n"
     end
     article += "----------------------------------\n\n"
@@ -88,8 +89,7 @@ class DrummingNews::Scraper
     doc.css("a.PostHeader").each do |scrape|
       article = DrummingNews::Article.new
       article.title = scrape.text
-      binding.pry
-      article.url = scrape.attribute("href")
+      article.url = "http://www.drumheadmag.com/" + scrape.attribute("href").value
       article.magazine = Drumhead
       Drumhead.articles << article
     end
