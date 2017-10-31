@@ -10,7 +10,6 @@ puts ""
 Modern_drummer = DrummingNews::Magazine.new("Modern Drummer")
 DRUM = DrummingNews::Magazine.new("DRUM!")
 Rhythm = DrummingNews::Magazine.new("Rhythm Magazine")
-Drumhead = DrummingNews::Magazine.new("Drumhead Magazine")
 
 DrummingNews::CLI.new.start
 

@@ -1,13 +1,11 @@
 class DrummingNews::CLI
-  attr_accessor :articles
+  attr_accessor :articles, :current_magazine
 
   def start
     @scraper = DrummingNews::Scraper.new #Instansiate scraper
-    @scraper.scrape_titles #get article titles
-    # @scraper.scrape_md ###For testing
-    # @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
-    # @scraper.scrape_rhythm #Samesies
-    @scraper.scrape_drumhead
+    @scraper.scrape_md ###For testing
+    @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
+    @scraper.scrape_rhythm #Samesies
     call
   end
 
@@ -22,23 +20,23 @@ class DrummingNews::CLI
     puts "1. Modern Drummer"
     puts "2. DRUM!"
     puts "3. Rhythm Magazine"
-    puts "4. Drumhead Magazine"
     puts "Or 'exit' to quit"
     mag_choice = ""
     mag_choice = gets.strip 
     case mag_choice.downcase ####Need to update calls here
       when "1"
         @articles = Modern_drummer.articles ###Find magazine by title and get articles
+        @current_magazine = Modern_drummer
       when "2"
         @articles = DRUM.articles
+        @current_magazine = DRUM
       when "3"
         @articles = Rhythm.articles
-      when "4" 
-        @articles = Drumhead.articles
+        @current_magazine = Rhythm
       when "exit"
         exit
       else
-        puts "Please enter 1-4 or 'exit'"
+        puts "Please enter 1-3 or 'exit'"
         choose_mag
     end
   end
@@ -46,7 +44,7 @@ class DrummingNews::CLI
   def list_articles
     puts "------------------------------------------"
     @articles.each_with_index do |article, index|
-      puts "#{index + 1}. #{article.title} - #{article.author} -  #{article.date}"
+      puts "#{index + 1}. #{article.title}"
     end
     puts "------------------------------------------"
   end
@@ -69,11 +67,9 @@ class DrummingNews::CLI
   end
 
   def display_article(article_choice)
-    article_url =  Drumhead.find(article_choice).url ###Todo un hard-code the magazine
-    article_content = @scraper.scrape_article(article_url)
+    article_url =  @current_magazine.find(article_choice).url
+    article_content = @scraper.scrape_article(article_url, @current_magazine)
     puts article_content
-    #display_content
     call
   end
-
 end

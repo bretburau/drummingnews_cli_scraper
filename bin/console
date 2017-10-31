@@ -9,7 +9,6 @@ require "drummingnews_cli_scraper"
 Modern_drummer = DrummingNews::Magazine.new("Modern Drummer")
 DRUM = DrummingNews::Magazine.new("DRUM!")
 Rhythm = DrummingNews::Magazine.new("Rhythm Magazine")
-Drumhead = DrummingNews::Magazine.new("Drumhead Magazine")
 Scraper = DrummingNews::Scraper.new
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.

@@ -1,25 +1,5 @@
 class DrummingNews::Scraper
-  attr_accessor :magazines
-
-  def scrape_titles ##### get titles   
-    scrape(Modern_drummer)
-    scrape(DRUM)
-    scrape(Drumhead)
-    scrape(Rhythm)
-  end
-
-  def scrape(magazine_name) ##Keeps adding dummy articles that are already created
-    # 10.times do
-    #   article = DrummingNews::Article.new
-    #   article.title = "Cool article"
-    #   article.author = "Writer Guy"
-    #   article.date = "12-22-2017"
-    #   article.magazine = magazine_name
-    #   article.url = "https://internet.net"
-    #   article.excerpt = "A breif description"
-    #   magazine_name.articles <<  article
-    # end
-  end 
+  attr_accessor :magazines 
 
   def scrape_md
     html = open("https://www.moderndrummer.com/")
@@ -27,7 +7,7 @@ class DrummingNews::Scraper
     doc.css("div.article").first(10).each do |scrape|
       article = DrummingNews::Article.new
       article.title = scrape.css("a.inline-link").text
-      article.author = scrape.css("div.article-author").text
+      # article.author = scrape.css("div.article-author").text
       article.url = scrape.css("a.inline-link").attribute("href").value
       # article.excerpt = scrape.css(".article-excerpt").text.strip   ###Don't think I'm gonna use this
       article.magazine = Modern_drummer
@@ -35,17 +15,22 @@ class DrummingNews::Scraper
     end
   end
 
-  def scrape_article(url) ###For MD right now...need to fix later
+  def scrape_article(url, current_magazine) ###For MD right now...need to fix later
+    if current_magazine == Modern_drummer #Set up scraping for different magazines
+      scrape_css = ".entry-content p"
+    elsif current_magazine == DRUM
+      scrape_css = ".cb-itemprop p"
+    elsif current_magazine == Rhythm
+      scrape_css = ".gallery-text p"
+    end
     article = ""
     html = open(url)
-    doc = Nokogiri::HTML(html)
-    ###return content as needed...hash or just the paragraph?
-    
+    doc = Nokogiri::HTML(html) 
+    doc.css(scrape_css).each do |p|   
     # doc.css(".entry-content p").each do |p| ## For MD!!!!
     # doc.css(".cb-itemprop p").each do |p| ## For DRUM!!!!!
     # doc.css(".gallery-text p").each do |p| ## For Rhythm
-    doc.css(".art-article").each do |p| ## For Rhythm  
-      article += p.content.scan(/.+?(?=abc)/).first.last
+      article += p.content
       article += "\n\n"
     end
     article += "----------------------------------\n\n"
@@ -83,16 +68,6 @@ class DrummingNews::Scraper
     end
   end
 
-  def scrape_drumhead
-    html = open("http://www.drumheadmag.com/news.html")
-    doc = Nokogiri::HTML(html)
-    doc.css("a.PostHeader").each do |scrape|
-      article = DrummingNews::Article.new
-      article.title = scrape.text
-      article.url = "http://www.drumheadmag.com/" + scrape.attribute("href").value
-      article.magazine = Drumhead
-      Drumhead.articles << article
-    end
-  end
+  
 
 end
