@@ -3,9 +3,9 @@ class DrummingNews::CLI
 
   def start
     @scraper = DrummingNews::Scraper.new #Instansiate scraper
-    @scraper.scrape_md ###For testing
-    @scraper.scrape_drum ##Also for testing...these should be implimented elsewhere probably
-    @scraper.scrape_rhythm #Samesies
+    @scraper.scrape_md 
+    @scraper.scrape_drum 
+    @scraper.scrape_rhythm 
     call
   end
 
@@ -23,7 +23,7 @@ class DrummingNews::CLI
     puts "Or 'exit' to quit"
     mag_choice = ""
     mag_choice = gets.strip 
-    case mag_choice.downcase ####Need to update calls here
+    case mag_choice.downcase 
       when "1"
         @articles = Modern_drummer.articles ###Find magazine by title and get articles
         @current_magazine = Modern_drummer

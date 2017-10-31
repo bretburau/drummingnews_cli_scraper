@@ -2,13 +2,13 @@ class DrummingNews::Magazine
   attr_accessor :name, :articles
   @@all = []
   def initialize(name)
-    @articles = [] #Might need to delete this...set up for testing
+    @articles = [] 
     @name = name
     @@all << self
   end
 
   def self.create(name)
-    self.new(name) #unless self.all.include?(name)
+    self.new(name)
   end
 
   def find(num)

@@ -7,34 +7,10 @@ class DrummingNews::Scraper
     doc.css("div.article").first(10).each do |scrape|
       article = DrummingNews::Article.new
       article.title = scrape.css("a.inline-link").text
-      # article.author = scrape.css("div.article-author").text
       article.url = scrape.css("a.inline-link").attribute("href").value
-      # article.excerpt = scrape.css(".article-excerpt").text.strip   ###Don't think I'm gonna use this
       article.magazine = Modern_drummer
       Modern_drummer.articles << article
     end
-  end
-
-  def scrape_article(url, current_magazine) ###For MD right now...need to fix later
-    if current_magazine == Modern_drummer #Set up scraping for different magazines
-      scrape_css = ".entry-content p"
-    elsif current_magazine == DRUM
-      scrape_css = ".cb-itemprop p"
-    elsif current_magazine == Rhythm
-      scrape_css = ".gallery-text p"
-    end
-    article = ""
-    html = open(url)
-    doc = Nokogiri::HTML(html) 
-    doc.css(scrape_css).each do |p|   
-    # doc.css(".entry-content p").each do |p| ## For MD!!!!
-    # doc.css(".cb-itemprop p").each do |p| ## For DRUM!!!!!
-    # doc.css(".gallery-text p").each do |p| ## For Rhythm
-      article += p.content
-      article += "\n\n"
-    end
-    article += "----------------------------------\n\n"
-    article
   end
 
   def scrape_drum
@@ -66,6 +42,25 @@ class DrummingNews::Scraper
       article.magazine = Rhythm
       Rhythm.articles << article
     end
+  end
+
+  def scrape_article(url, current_magazine) 
+    if current_magazine == Modern_drummer #Set up scraping for different magazines
+      scrape_css = ".entry-content p"
+    elsif current_magazine == DRUM
+      scrape_css = ".cb-itemprop p"
+    elsif current_magazine == Rhythm
+      scrape_css = ".gallery-text p"
+    end
+    article = ""
+    html = open(url)
+    doc = Nokogiri::HTML(html) 
+    doc.css(scrape_css).each do |p|   
+      article += p.text
+      article += "\n\n"
+    end
+    article += "----------------------------------\n\n"
+    article
   end
 
   
