@@ -45,7 +45,7 @@ class DrummingNews::Scraper
     # doc.css(".cb-itemprop p").each do |p| ## For DRUM!!!!!
     # doc.css(".gallery-text p").each do |p| ## For Rhythm
     doc.css(".art-article").each do |p| ## For Rhythm  
-      article += p.content
+      article += p.content.scan(/.+?(?=abc)/).first.last
       article += "\n\n"
     end
     article += "----------------------------------\n\n"
