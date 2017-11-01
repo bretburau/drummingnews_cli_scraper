@@ -1,5 +1,5 @@
 class DrummingNews::Article
-  attr_accessor :title, :author, :date, :magazine, :url, :excerpt
+  attr_accessor :title, :magazine, :url
   @@all = []
 
   def initialize

@@ -59,7 +59,7 @@ class DrummingNews::Scraper
       article += p.text
       article += "\n\n"
     end
-    article += "----------------------------------\n\n"
+    article += "------------------------------------------\n\n"
     article
   end
 

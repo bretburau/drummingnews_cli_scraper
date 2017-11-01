@@ -42,11 +42,11 @@ class DrummingNews::CLI
   end
 
   def list_articles
-    puts "------------------------------------------"
+    puts "\n------------------------------------------"
     @articles.each_with_index do |article, index|
       puts "#{index + 1}. #{article.title}"
     end
-    puts "------------------------------------------"
+    puts "------------------------------------------\n"
   end
 
   def choose_article
