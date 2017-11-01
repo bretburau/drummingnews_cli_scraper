@@ -4,8 +4,9 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require_relative '../lib/drummingnews_cli_scraper.rb'
+puts "\n**********************************\n"
 puts "Welcome to your drumming newsfeed!"  
-puts ""
+puts "**********************************"
 
 Modern_drummer = DrummingNews::Magazine.new("Modern Drummer")
 DRUM = DrummingNews::Magazine.new("DRUM!")

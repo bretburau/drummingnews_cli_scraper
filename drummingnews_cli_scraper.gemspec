@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = DrummingnewsCliScraper::VERSION
   spec.authors       = ["Bret Burau"]
   spec.email         = ["burhooo@gmail.com"]
-
   spec.summary       = "Scraper CLI to display articles for several drumming publications."
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/bretburau/drummingnews_cli_scraper"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -25,10 +24,13 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir        = "bin"
+  spec.executables   = ["drummingnews"]#spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency "pry", '~> 0'
+  spec.add_runtime_dependency "nokogiri", '~> 0'
+  # spec.add_runtime_dependency "open-uri", '~> 0'
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
 end
