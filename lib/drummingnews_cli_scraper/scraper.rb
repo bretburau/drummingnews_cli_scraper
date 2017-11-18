@@ -1,7 +1,7 @@
 class DrummingNews::Scraper
   attr_accessor :magazines 
 
-  def scrape_md
+  def self.scrape_md
     html = open("https://www.moderndrummer.com/")
     doc = Nokogiri::HTML(html)
     doc.css("div.article").first(10).each do |scrape|
@@ -13,7 +13,7 @@ class DrummingNews::Scraper
     end
   end
 
-  def scrape_drum
+  def self.scrape_drum
     html = open("http://drummagazine.com/news/")
     doc = Nokogiri::HTML(html)
     doc.css("h2.cb-post-title").each do |scrape|
@@ -25,7 +25,7 @@ class DrummingNews::Scraper
     end
   end
 
-  def scrape_rhythm
+  def self.scrape_rhythm
     html = open("http://www.musicradar.com/rhythm")
     doc = Nokogiri::HTML(html)
     doc.css(".feature-block a").each do |scrape| #Scrapes header titles
@@ -40,17 +40,22 @@ class DrummingNews::Scraper
       article.title = scrape.css("h3").text
       article.url = scrape.css("a").attribute("href")
       article.magazine = Rhythm
+      # binding.pry
       Rhythm.articles << article
     end
   end
 
-  def scrape_article(url, current_magazine) 
+  def self.scrape_article(url, current_magazine, article_choice) 
     if current_magazine == Modern_drummer #Set up scraping for different magazines
       scrape_css = ".entry-content p"
     elsif current_magazine == DRUM
       scrape_css = ".cb-itemprop p"
     elsif current_magazine == Rhythm
-      scrape_css = ".gallery-text p"
+      if article_choice <= 3 
+        scrape_css = ".gallery-text p"
+      else
+        scrape_css = ".text-copy p"
+      end
     end
     article = ""
     html = open(url)
@@ -61,6 +66,7 @@ class DrummingNews::Scraper
     end
     article += "------------------------------------------\n\n"
     article
+    
   end
 
   

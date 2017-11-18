@@ -2,10 +2,10 @@ class DrummingNews::CLI
   attr_accessor :articles, :current_magazine
 
   def start
-    @scraper = DrummingNews::Scraper.new #Instansiate scraper
-    @scraper.scrape_md 
-    @scraper.scrape_drum 
-    @scraper.scrape_rhythm 
+    # @scraper = DrummingNews::Scraper.new #Instansiate scraper
+    DrummingNews::Scraper.scrape_md 
+    DrummingNews::Scraper.scrape_drum 
+    DrummingNews::Scraper.scrape_rhythm 
     call
   end
 
@@ -52,7 +52,7 @@ class DrummingNews::CLI
   def choose_article
     puts "Which one would you like to view? Enter 'back' to go to the main menu, or 'exit' to quit"
     article_choice = gets.strip
-    until article_choice.to_i.between?(1, 10) || article_choice.downcase == "back" || article_choice.downcase == "exit" do ###Probably gonna need to change condition to a .length or something
+    until article_choice.to_i.between?(1, 10) || article_choice.downcase == "back" || article_choice.downcase == "exit" do 
       puts "Please enter a valid article number or 'back'"
       article_choice = gets.strip
     end
@@ -68,7 +68,7 @@ class DrummingNews::CLI
 
   def display_article(article_choice)
     article_url =  @current_magazine.find(article_choice).url
-    article_content = @scraper.scrape_article(article_url, @current_magazine)
+    article_content = DrummingNews::Scraper.scrape_article(article_url, @current_magazine, article_choice)
     puts article_content
     call
   end
