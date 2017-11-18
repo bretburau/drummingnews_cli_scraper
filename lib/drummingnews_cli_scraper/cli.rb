@@ -2,7 +2,6 @@ class DrummingNews::CLI
   attr_accessor :articles, :current_magazine
 
   def start
-    # @scraper = DrummingNews::Scraper.new #Instansiate scraper
     DrummingNews::Scraper.scrape_md 
     DrummingNews::Scraper.scrape_drum 
     DrummingNews::Scraper.scrape_rhythm 
