@@ -51,11 +51,7 @@ class DrummingNews::Scraper
     elsif current_magazine == DRUM
       scrape_css = ".cb-itemprop p"
     elsif current_magazine == Rhythm
-      if article_choice <= 3 
-        scrape_css = ".gallery-text p"
-      else
-        scrape_css = ".text-copy p"
-      end
+      article_choice <= 3 ? scrape_css = ".gallery-text p" : scrape_css = ".text-copy p"
     end
     article = ""
     html = open(url)
